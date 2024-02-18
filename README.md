@@ -1,14 +1,53 @@
-# 18 NoSQL: Social Network API
+<a ID="readme-top"></a>
 
-## Your Task
+<div align="center">
+  
+# ⭐ NoSQL: Social Network API ⭐
 
-MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. Over the last part of this course, you’ll use several of the technologies that social networking platforms use in their full-stack applications. Because the foundation of these applications is data, it’s important that you understand how to build and structure the API first.
+[![Node.js Badge](https://img.shields.io/badge/Node.js-393?style=for-the-badge&logo=nodedotjs&logoColor=fff)](https://nodejs.org/en)
+[![Insomia Badge](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)](https://insomnia.rest/)
+[![Express Badge](https://img.shields.io/badge/Express-000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB Badge](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![GitHub Badge](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/justinsta624/)
 
-Your Challenge is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. You’ll use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the [Express.js](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages, you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.
+</div>
+</div>
 
-No seed data is provided, so you’ll need to create your own data using Insomnia after you’ve created your API.
+## Outcome
 
-Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met. You’ll need to submit a link to the video and add it to the README of your project.
+Followings are the outcomes of the challenge 18:
+
+* A walkthrough video demonstrating the functionality of the application </br>
+[Walk-Through Video: Webm file](https://drive.google.com/file/d/1DesRcjh71bOVOYdFWXmtrp2ilY5Ni-Oo/view) </br>
+
+* The URL of the GitHub repository, with a unique name and a README describing the project </br>
+[Repository for this challenge](https://github.com/justinsta624/NoSQLMetaAPI)
+
+<div align="center">
+  
+
+</div>
+</div>
+
+## Table of Contents
+
+- [Description](#description)
+- [User Story](#User-Story)
+- [Acceptance Criteria](#Acceptance-Criteria)
+- [Model Structure](#model-structure)
+- [Route Structure](#route-structure)
+- [Technology Used](#technology-used)
+- [Reference](#Reference)
+- [License](#license)
+
+## Description
+
+- To build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list.
+- To have MongoDB installed on your machine. [MongoDB installation guide](https://coding-boot-camp.github.io/full-stack/mongodb/how-to-install-mongodb) to install MongoDB locally.
+- Using Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the [Express.js](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages
+- Using a JavaScript date library or the native JavaScript `Date` object to format timestamps.
+- Create own data using Insomnia after creating API.
+- Create a walkthrough video that demonstrates its functionality
 
 ## User Story
 
@@ -29,126 +68,65 @@ THEN the data for each of these routes is displayed in a formatted JSON
 WHEN I test API POST, PUT, and DELETE routes in Insomnia
 THEN I am able to successfully create, update, and delete users and thoughts in my database
 WHEN I test API POST and DELETE routes in Insomnia
-THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
+THEN I am able to successfully create and delete reactions to thoughts and add and remove friends
+to a user’s friend list
 ```
 
-## Mock Up
-
-The following animations show examples of the application's API routes being tested in Insomnia.
-
-The following animation shows GET routes to return all users and all thoughts being tested in Insomnia:
-
-![Demo of GET routes to return all users and all thoughts being tested in Insomnia.](./Assets/18-nosql-homework-demo-01.gif)
-
-The following animation shows GET routes to return a single user and a single thought being tested in Insomnia:
-
-![Demo that shows GET routes to return a single user and a single thought being tested in Insomnia.](./Assets/18-nosql-homework-demo-02.gif)
-
-The following animation shows the POST, PUT, and DELETE routes for users being tested in Insomnia:
-
-![Demo that shows the POST, PUT, and DELETE routes for users being tested in Insomnia.](./Assets/18-nosql-homework-demo-03.gif)
-
-In addition to this, your walkthrough video should show the POST, PUT, and DELETE routes for thoughts being tested in Insomnia.
-
-The following animation shows the POST and DELETE routes for a user’s friend list being tested in Insomnia:
-
-![Demo that shows the POST and DELETE routes for a user’s friend list being tested in Insomnia.](./Assets/18-nosql-homework-demo-04.gif)
-
-In addition to this, your walkthrough video should show the POST and DELETE routes for reactions to thoughts being tested in Insomnia.
-
-## Getting Started
-
-Be sure to have MongoDB installed on your machine. Follow the [MongoDB installation guide on The Full-Stack Blog](https://coding-boot-camp.github.io/full-stack/mongodb/how-to-install-mongodb) to install MongoDB locally.
-
-Use the following guidelines to set up your models and API routes:
-
-### Models
+## Model Structure
 
 **User**:
-
 * `username`
   * String
   * Unique
   * Required
   * Trimmed
-
 * `email`
   * String
   * Required
   * Unique
   * Must match a valid email address (look into Mongoose's matching validation)
-
 * `thoughts`
   * Array of `_id` values referencing the `Thought` model
-
 * `friends`
   * Array of `_id` values referencing the `User` model (self-reference)
-
-**Schema Settings**:
-
-Create a virtual called `friendCount` that retrieves the length of the user's `friends` array field on query.
-
 ---
-
 **Thought**:
-
 * `thoughtText`
   * String
   * Required
   * Must be between 1 and 280 characters
-
 * `createdAt`
   * Date
   * Set default value to the current timestamp
   * Use a getter method to format the timestamp on query
-
 * `username` (The user that created this thought)
   * String
   * Required
-
 * `reactions` (These are like replies)
   * Array of nested documents created with the `reactionSchema`
-
-**Schema Settings**:
-
-Create a virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query.
-
 ---
-
 **Reaction** (SCHEMA ONLY)
-
 * `reactionId`
   * Use Mongoose's ObjectId data type
   * Default value is set to a new ObjectId
-
 * `reactionBody`
   * String
   * Required
   * 280 character maximum
-
 * `username`
   * String
   * Required
-
 * `createdAt`
   * Date
   * Set default value to the current timestamp
   * Use a getter method to format the timestamp on query
 
-**Schema Settings**:
-
-This will not be a model, but rather will be used as the `reaction` field's subdocument schema in the `Thought` model.
-
-### API Routes
+## Route Structure
 
 **`/api/users`**
-
 * `GET` all users
-
 * `GET` a single user by its `_id` and populated thought and friend data
-
 * `POST` a new user:
-
 ```json
 // example data
 {
@@ -156,31 +134,18 @@ This will not be a model, but rather will be used as the `reaction` field's subd
   "email": "lernantino@gmail.com"
 }
 ```
-
 * `PUT` to update a user by its `_id`
-
 * `DELETE` to remove user by its `_id`
-
 **BONUS**: Remove a user's associated thoughts when deleted.
-
 ---
-
 **`/api/users/:userId/friends/:friendId`**
-
 * `POST` to add a new friend to a user's friend list
-
 * `DELETE` to remove a friend from a user's friend list
-
 ---
-
 **`/api/thoughts`**
-
 * `GET` to get all thoughts
-
 * `GET` to get a single thought by its `_id`
-
 * `POST` to create a new thought (don't forget to push the created thought's `_id` to the associated user's `thoughts` array field)
-
 ```json
 // example data
 {
@@ -189,26 +154,36 @@ This will not be a model, but rather will be used as the `reaction` field's subd
   "userId": "5edff358a0fcb779aa7b118b"
 }
 ```
-
 * `PUT` to update a thought by its `_id`
-
 * `DELETE` to remove a thought by its `_id`
-
 ---
-
 **`/api/thoughts/:thoughtId/reactions`**
-
 * `POST` to create a reaction stored in a single thought's `reactions` array field
-
 * `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
 
-## Review
+## Technology-Used
 
-You are required to submit BOTH of the following for review:
+- **Node.js**: Runtime environment for executing server-side JavaScript code.
+- **Express**: Web application framework for building RESTful APIs.
+- **MongoDB**: Open-source NoSQL database management system designed to store, retrieve, and manage data in a flexible, scalable, and high-performance manner.
+- **Insomnia**: Tool designed for testing and debugging APIs.
+- **Nodemon**: Development tool for auto-reloading the server during development.
 
-* A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met.
+## Reference
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
+- [GET & POST Routes for retrieving & adding New Data](https://expressjs.com/en/guide/using-middleware.html)
+- [Loopback Troubleshooting Guide](https://coding-boot-camp.github.io/full-stack/computer-literacy/loopback-issues-with-localhost)
+- [Understanding the different types of NoSQL databases](https://www.mongodb.com/databases/types)
+- [MongoDB docs on downloading and installing Compass](https://www.mongodb.com/docs/compass/current/install/)
+- [MongoDB docs on getting started](https://www.mongodb.com/docs/manual/tutorial/getting-started/)
+- [Mongoose docs on getting started](https://mongoosejs.com/docs/index.html)
+- [How to meet High-Quality Coding Standards](https://www.freecodecamp.org/news/how-to-write-clean-code/)
+
+## License
+
+For details click on the following link to go to the "LICENSE" file:
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge&logo=mit)](https://opensource.org/licenses/MIT)
 
 ---
 © 2024 Hanbyeol Justin Lee. Confidential and Proprietary. All Rights Reserved.
