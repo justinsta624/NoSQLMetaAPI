@@ -121,7 +121,7 @@ const getRandomUsername = () =>
     getRandomArrItem(usernames);
 
 // Function to generate random thoughts given a count 'int'
-const getRandomThoughts = (int) => {
+const getRandomThoughts = (int,username) => {
     const results = [];
     const usedIndexes = new Set(); // Keep track of used indexes
     let attempts = 0; // To prevent infinite loop in case int is larger than thoughts.length
@@ -132,6 +132,7 @@ const getRandomThoughts = (int) => {
             const newThought = {
                 _id: new mongoose.Types.ObjectId(),
                 thoughtText: thoughtText,
+                username: username,
             };
             usedIndexes.add(index);
             results.push(newThought);
