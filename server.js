@@ -3,7 +3,7 @@ const express = require('express');
 const db = require('./config/connection');
 const mongoose = require('mongoose');
 const moment = require('moment');
-const seedDatabase = require('./utils/seed');
+// const seedDatabase = require('./utils/seed');
 
 // Creating an instance of the express application
 const app = express();
@@ -25,7 +25,8 @@ app.use(require('./routes'));
 mongoose.set('debug', true);
 
 // Starting the server on the specified port and logging a message to the console
-seedDatabase(() => {
+// seedDatabase(() => {
+db.once("open", () => {
   app.listen(PORT, () => {
     console.log(`Connected on localhost:${PORT}`);
   });

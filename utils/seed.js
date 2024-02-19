@@ -44,7 +44,7 @@ const seedDatabase = async (callback) => {
     for (let i = 0; i < usernames.length; i++) {
         const username = usernames[i];
   
-        const userThoughts = getRandomThoughts(3);
+        const userThoughts = getRandomThoughts(3,username);
   
         thoughts.push(...userThoughts);
   
@@ -73,4 +73,5 @@ const seedDatabase = async (callback) => {
   };
   
   // Exporting the 'seedDatabase' function for use in other files
-  module.exports = seedDatabase;
+  // module.exports = seedDatabase;
+seedDatabase();
