@@ -18,11 +18,7 @@
 Followings are the outcomes of the challenge 18:
 
 * A walkthrough video demonstrating the functionality of the application </br>
-<<<<<<< HEAD
 [Walk-Through Video: Webm file](https://drive.google.com/file/d/1f6T_ppK0ZiD8IUmP4HiwsjjEfYdfWJu9/view?usp=sharing) </br>
-=======
-[Walk-Through Video: Webm file](https://drive.google.com/file/d/16s0UV_2l9iDFFiRP6OCrI56S1xTVClTl/view?usp=sharing) </br>
->>>>>>> b6ccae64f1cb98f06963777092a040bafb1d3755
 
 * The URL of the GitHub repository, with a unique name and a README describing the project </br>
 [Repository for this challenge](https://github.com/justinsta624/NoSQLMetaAPI)
