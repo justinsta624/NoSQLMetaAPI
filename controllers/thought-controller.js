@@ -82,7 +82,7 @@ const thoughtController = {
                 console.log(dbThoughtData)
                 if (!dbThoughtData) {
                     // res.status(404).json({ message: 'No thoughts found with that id!' });
-                    return { message: 'No thoughts found with that id!' }; 
+                    return { message: 'No thoughts found with that id!' };
                 }
                 return User.findOneAndUpdate(
                     { username: dbThoughtData.username },

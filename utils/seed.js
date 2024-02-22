@@ -34,44 +34,46 @@ const seedDatabase = async (callback) => {
 
     // Get the array of usernames from data.js
     const usernames = [
-        'KylianMbappe', 'ErlingHaaland', 'JudeBellingham', 'KevinDeBruyne', 'LionelMessi', 'ChristianoRonaldo',
-        'RobertLewandowski', 'Jorginho', 'NGoloKante', 'MohamedSalah', 'KarimBenzema', 'HarryKane',
-        'JackGrealish', 'SadioMane', 'SonHeungmin', 'LeeKangin', 'FlorianWirtz', 'AlexGrimaldo',
-        'PhilFoden', 'JamalMusiala', 'JeremyFrimpong', 'KuboTakefusa', 'MehdiTaremi', 'Endrick'
+      'KylianMbappe', 'ErlingHaaland', 'JudeBellingham', 'KevinDeBruyne', 'LionelMessi', 'ChristianoRonaldo',
+      'RobertLewandowski', 'Jorginho', 'NGoloKante', 'MohamedSalah', 'KarimBenzema', 'HarryKane',
+      'JackGrealish', 'SadioMane', 'SonHeungmin', 'LeeKangin', 'FlorianWirtz', 'AlexGrimaldo',
+      'PhilFoden', 'JamalMusiala', 'JeremyFrimpong', 'KuboTakefusa', 'MehdiTaremi', 'Endrick'
     ];
 
     // Loop through usernames, generate thoughts, and add data to users and thoughts arrays
     for (let i = 0; i < usernames.length; i++) {
-        const username = usernames[i];
-  
-        const userThoughts = getRandomThoughts(3,username);
-  
-        thoughts.push(...userThoughts);
-  
-        users.push({
-          username: username,
-          thoughts: userThoughts.map(thought => thought._id),
-        });
-      }
-  
-      // Insert users into the 'users' collection
-      await User.collection.insertMany(users);
-  
-      // Insert thoughts into the 'thoughts' collection
-      await Thought.collection.insertMany(thoughts);
-  
-      // Log the seeded data to the console
-      console.table(users);
-      console.table(thoughts);
-      console.info('Successfully Seeded!');
-  
-      // Invoke the provided callback function if it's a function
-      if (typeof callback === 'function') {
-        callback();
-      }
-    });
-  };
-  
-  // Exporting the 'seedDatabase' function for use in other files
-  // module.exports = seedDatabase;
+      const username = usernames[i];
+
+      // Generate random thoughts for each user
+      const userThoughts = getRandomThoughts(3, username);
+
+      // Add user thoughts to the thoughts array
+      thoughts.push(...userThoughts);
+
+      // Add user data to the users array
+      users.push({
+        username: username,
+        thoughts: userThoughts.map(thought => thought._id),
+      });
+    }
+
+    // Insert users into the 'users' collection
+    await User.collection.insertMany(users);
+
+    // Insert thoughts into the 'thoughts' collection
+    await Thought.collection.insertMany(thoughts);
+
+    // Log the seeded data to the console
+    console.table(users);
+    console.table(thoughts);
+    console.info('Successfully Seeded!');
+
+    // Invoke the provided callback function if it's a function
+    if (typeof callback === 'function') {
+      callback();
+    }
+  });
+};
+
+// Call the seedDatabase function
 seedDatabase();
