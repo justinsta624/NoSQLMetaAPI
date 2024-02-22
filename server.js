@@ -3,7 +3,6 @@ const express = require('express');
 const db = require('./config/connection');
 const mongoose = require('mongoose');
 const moment = require('moment');
-// const seedDatabase = require('./utils/seed');
 
 // Creating an instance of the express application
 const app = express();
@@ -24,10 +23,11 @@ app.use(require('./routes'));
 // Enabling debugging for mongoose to log database interactions
 mongoose.set('debug', true);
 
-// Starting the server on the specified port and logging a message to the console
-// seedDatabase(() => {
+// Event listener for when the MongoDB connection is open
 db.once("open", () => {
+  // Start the express app listening on the specified port
   app.listen(PORT, () => {
+    // Log a message indicating successful connection and the listening port
     console.log(`Connected on localhost:${PORT}`);
   });
 });
